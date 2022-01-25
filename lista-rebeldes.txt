@@ -1,0 +1,11 @@
+CARDÁPIO LET'S CODE
+Rebelde: 0
+Nome: lucas
+Idade: 14
+Raça: HUMANO
+-----------------------------------
+Rebelde: 1
+Nome: askdmnasd
+Idade: 18888
+Raça: RAKATA
+-----------------------------------
