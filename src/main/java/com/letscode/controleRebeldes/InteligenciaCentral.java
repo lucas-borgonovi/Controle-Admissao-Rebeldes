@@ -129,7 +129,7 @@ public class InteligenciaCentral {
 
             @Cleanup PrintWriter writer = new PrintWriter("lista-rebeldes.txt","UTF-8");
 
-            writer.println("CARDÁPIO LET'S CODE");
+            writer.println("Lista de Rebeldes");
 
             for (int i = 0; i < rebeldes.size(); i++) {
 

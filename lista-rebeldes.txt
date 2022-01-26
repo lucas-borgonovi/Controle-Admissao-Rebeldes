@@ -1,6 +1,0 @@
-CARDÁPIO LET'S CODE
-Rebelde: 0
-Nome: teste
-Idade: 921831
-Raça: RAKATA
------------------------------------
