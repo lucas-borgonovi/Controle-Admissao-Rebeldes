@@ -7,20 +7,20 @@ import lombok.NoArgsConstructor;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
-@NoArgsConstructor
+
 public class InteligenciaCentral {
 
-    private ArrayList<Rebelde> rebeldes;
+    private LinkedList<Rebelde> rebeldes;
 
+    public InteligenciaCentral() {
+        rebeldes = new LinkedList<Rebelde>();
+    }
 
     public void CadastrarRebelde(){
 
-        rebeldes = new ArrayList<Rebelde>();
+        //rebeldes = new LinkedList<Rebelde>();
 
         Scanner sc = new Scanner(System.in);
 
@@ -47,7 +47,7 @@ public class InteligenciaCentral {
                 continue;
 
             }else{
-                sc.close();
+                //sc.close();
                 break;
             }
 
@@ -125,9 +125,60 @@ public class InteligenciaCentral {
 
     }
 
+    private LinkedList<Rebelde> perguntaOrdenacao(){
+
+        Scanner sc = new Scanner(System.in);
+
+        do{
+
+
+            System.out.println("Deseja ordenar por qual atributo?");
+            System.out.println("0- Nome");
+            System.out.println("1- Idade");
+            System.out.println("2- Raça");
+
+            try{
+                int resposta = Integer.parseInt(sc.next());
+
+
+                if(resposta >= 0 && resposta <= 2){
+
+                    switch (resposta) {
+                        case 0:
+                            return Utils.Sort(rebeldes,"Nome");
+                        case 1:
+                            return Utils.Sort(rebeldes);
+                        case 2:
+                            return Utils.Sort(rebeldes,"Raca");
+                        default:
+                            break;
+                    }
+
+                    sc.close();
+
+                }
+
+
+            }catch (Exception ex){
+                System.out.println("Digite um valor válido!");
+                continue;
+            }
+
+
+
+
+        }while(true);
+
+
+
+    }
+
     public void imprimirListaRebeldes() throws FileNotFoundException, UnsupportedEncodingException {
 
             @Cleanup PrintWriter writer = new PrintWriter("lista-rebeldes.txt","UTF-8");
+
+            rebeldes = perguntaOrdenacao();
+
 
             writer.println("Lista de Rebeldes");
 
