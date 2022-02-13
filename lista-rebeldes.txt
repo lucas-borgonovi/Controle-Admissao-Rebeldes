@@ -1,21 +1,6 @@
 Lista de Rebeldes
 Rebelde: 0
-Nome: asd
+Nome: teste
 Idade: 12
-Raça: GREE
------------------------------------
-Rebelde: 1
-Nome: adas
-Idade: 21
 Raça: HUMANO
------------------------------------
-Rebelde: 2
-Nome: lucas
-Idade: 13
-Raça: RAKATA
------------------------------------
-Rebelde: 3
-Nome: asds
-Idade: 213
-Raça: RAKATA
 -----------------------------------

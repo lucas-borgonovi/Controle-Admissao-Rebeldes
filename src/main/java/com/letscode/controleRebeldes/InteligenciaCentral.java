@@ -1,5 +1,10 @@
 package com.letscode.controleRebeldes;
 
+import Exceptions.WrongInput;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
 import lombok.NoArgsConstructor;
@@ -8,9 +13,13 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class InteligenciaCentral {
+
+    private static final Logger LOGGER = LogManager.getLogger(InteligenciaCentral.class);
 
     private LinkedList<Rebelde> rebeldes;
 
@@ -25,17 +34,30 @@ public class InteligenciaCentral {
         Scanner sc = new Scanner(System.in);
 
         while(true){
-            Rebelde rebelde = new Rebelde();
+            //Rebelde rebelde = new Rebelde();
 
-            rebelde.setNome(getNomeRebelde());
+            Rebelde rebelde =Rebelde.builder()
+                            .Nome(getNomeRebelde())
+                            .Idade(getIdadeRebelde())
+                            .Raca(getRacaRebelde())
+                            .build();
 
-            rebelde.setIdade(getIdadeRebelde());
-
-            rebelde.setRaca(getRacaRebelde());
+//            rebelde.setNome(getNomeRebelde());
+//
+//            rebelde.setIdade(getIdadeRebelde());
+//
+//            rebelde.setRaca(getRacaRebelde());
 
             System.out.println(rebelde.getNome());
             System.out.println(rebelde.getIdade());
             System.out.println(rebelde.getRaca());
+
+//            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//            Validator validator = factory.getValidator();
+//
+//            Set<ConstraintViolation<Rebelde>> constraintViolations = validator.validate(rebelde);
+//
+//            constraintViolations.forEach(x -> LOGGER.error("O  atributo : " + x.getPropertyPath() + "-" + x.getMessage()));
 
             rebeldes.add(rebelde);
 
@@ -81,8 +103,9 @@ public class InteligenciaCentral {
 
                 return idade;
 
-            }catch (Exception ex){
-                System.out.println("Digite um valor válido");
+            }catch(Exception ex){
+                LOGGER.error(new WrongInput("O valor digitado é inválido. Por favor, digite um número."));
+                //System.out.println("Digite um valor válido");
                 continue;
             }
         }while(true);
@@ -114,8 +137,11 @@ public class InteligenciaCentral {
                         default:
                             break;
                     }
+                }else{
+                    LOGGER.error("O valor deve estar no intervalo entre 0 e 2...");
                 }
             }catch (Exception ex){
+                LOGGER.error(new WrongInput("Não há raça correspondente a esse número. Por favor, digite um número válido."));
                 System.out.println("Digite um valor válido!");
                 continue;
             }
@@ -156,11 +182,14 @@ public class InteligenciaCentral {
 
                     sc.close();
 
+                }else{
+                    LOGGER.error("O valor deve estar no intervalo entre 0 e 2...");
                 }
 
 
             }catch (Exception ex){
-                System.out.println("Digite um valor válido!");
+                LOGGER.error(new WrongInput("Não há ordenação para o valor inserido. Por favor, digite um valor válido."));
+                //System.out.println("Digite um valor válido!");
                 continue;
             }
 
